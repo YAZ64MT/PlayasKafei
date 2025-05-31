@@ -31,7 +31,7 @@ void preregisterLinkDLs() {
     ZModelReplacer_preregisterDL(OBJECT_LINK_CHILD, gLinkHumanRightHandClosedDL);
 }
 
-#define SET_KAFEI_OVER_LINK(vanillaLinkDL, vanillaKafeiDL) ZModelReplacer_setCustomDL(OBJECT_LINK_CHILD, vanillaLinkDL, ZGlobalObj_getGlobalGfxPtr(OBJECT_TEST3, vanillaKafeiDL))
+#define SET_KAFEI_OVER_LINK(vanillaLinkDL, vanillaKafeiDL) ZModelReplacer_addCustomDL(OBJECT_LINK_CHILD, vanillaLinkDL, ZGlobalObj_getGlobalGfxPtr(OBJECT_TEST3, vanillaKafeiDL))
 
 void replaceLink() {
     SET_KAFEI_OVER_LINK(gLinkHumanWaistDL, gKafeiWaistDL);
