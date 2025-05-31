@@ -62,7 +62,7 @@ extern TexturePtr sPlayerEyesTextures[];
 extern TexturePtr sPlayerMouthTextures[];
 
 TexturePtr gVanillaEyesTex[PLAYER_EYES_MAX];
-TexturePtr gVanillaMouthsTex[PLAYER_EYES_MAX];
+TexturePtr gVanillaMouthsTex[PLAYER_MOUTH_MAX];
 
 // make sure the sword can be replaced w/o an object reload
 RECOMP_CALLBACK(YAZMT_Z64_MODEL_REPLACER_MOD_NAME, ZModelReplacer_onReady)
@@ -79,31 +79,6 @@ void onModelReplacerReady() {
         gVanillaMouthsTex[i] = sPlayerMouthTextures[i];
     }
 }
-
-extern TexturePtr sPlayerEyesTextures[PLAYER_EYES_MAX];
-
-TexturePtr sPlayerMouthTextures[PLAYER_MOUTH_MAX];
-
-/*
-TexturePtr sPlayerEyesTextures[PLAYER_EYES_MAX] = {
-    gLinkHumanEyesOpenTex,        // PLAYER_EYES_OPEN
-    gLinkHumanEyesHalfTex,        // PLAYER_EYES_HALF
-    gLinkHumanEyesClosedTex,      // PLAYER_EYES_CLOSED
-    gLinkHumanEyesRollRightTex,   // PLAYER_EYES_ROLL_RIGHT
-    gLinkHumanEyesRollLeftTex,    // PLAYER_EYES_ROLL_LEFT
-    gLinkHumanEyesRollUpTex,      // PLAYER_EYES_ROLL_UP
-    gLinkHumanEyesRollDownTex,    // PLAYER_EYES_ROLL_DOWN
-    object_link_child_Tex_003800, // PLAYER_EYES_7
-};
-
-TexturePtr sPlayerMouthTextures[PLAYER_MOUTH_MAX] = {
-    gLinkHumanMouthClosedTex, // PLAYER_MOUTH_CLOSED
-    gLinkHumanMouthTeethTex,  // PLAYER_MOUTH_TEETH
-    gLinkHumanMouthAngryTex,  // PLAYER_MOUTH_ANGRY
-    gLinkHumanMouthHappyTex,  // PLAYER_MOUTH_HAPPY
-};
-
-*/
 
 RECOMP_HOOK("Player_Init")
 void updateModel_on_Player_Init(Actor *thisx, PlayState *play) {
