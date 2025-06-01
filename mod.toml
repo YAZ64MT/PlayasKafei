@@ -70,11 +70,3 @@ description = "Loads Kafei's model over human Link's"
 type = "Enum"
 options = [ "Off", "On" ]
 default = "On"
-
-[[manifest.config_options]]
-id = "link_over_kafei"
-name = "Replace Kafei with Link"
-description = "Loads human Link's model over Kafei's"
-type = "Enum"
-options = [ "Off", "On" ]
-default = "Off"

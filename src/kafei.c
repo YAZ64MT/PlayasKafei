@@ -18,26 +18,6 @@ extern TexturePtr sEyesTextures[];
 
 u32 gIsKafeiOverLink = 999;
 
-u32 gIsLinkOverKafei = 999;
-
-void setLinkFaceTexOnKafei() {
-    u32 base = (uintptr_t)ZGlobalObj_getGlobalObject(OBJECT_LINK_CHILD);
-
-    gKafeiEyesTextures[0] = (TexturePtr)(base + SEGMENT_OFFSET(gLinkHumanEyesOpenTex));
-    gKafeiEyesTextures[1] = (TexturePtr)(base + SEGMENT_OFFSET(gLinkHumanEyesHalfTex));
-    gKafeiEyesTextures[2] = (TexturePtr)(base + SEGMENT_OFFSET(gLinkHumanEyesClosedTex));
-    gKafeiEyesTextures[3] = (TexturePtr)(base + SEGMENT_OFFSET(gLinkHumanEyesRollRightTex));
-    gKafeiEyesTextures[4] = (TexturePtr)(base + SEGMENT_OFFSET(gLinkHumanEyesRollLeftTex));
-    gKafeiEyesTextures[5] = (TexturePtr)(base + SEGMENT_OFFSET(gLinkHumanEyesRollUpTex));
-    gKafeiEyesTextures[6] = (TexturePtr)(base + SEGMENT_OFFSET(gLinkHumanEyesRollDownTex));
-    gKafeiEyesTextures[7] = (TexturePtr)(base + SEGMENT_OFFSET(object_link_child_Tex_003800));
-
-    gKafeiMouthTextures[0] = (TexturePtr)(base + SEGMENT_OFFSET(gLinkHumanMouthClosedTex));
-    gKafeiMouthTextures[1] = (TexturePtr)(base + SEGMENT_OFFSET(gLinkHumanMouthTeethTex));
-    gKafeiMouthTextures[2] = (TexturePtr)(base + SEGMENT_OFFSET(gLinkHumanMouthAngryTex));
-    gKafeiMouthTextures[3] = (TexturePtr)(base + SEGMENT_OFFSET(gLinkHumanMouthHappyTex));
-}
-
 void setKafeiFaceTexOnLink() {
     u32 base = (uintptr_t)ZGlobalObj_getGlobalObject(OBJECT_TEST3);
 
@@ -54,22 +34,6 @@ void setKafeiFaceTexOnLink() {
     sPlayerMouthTextures[1] = (TexturePtr)(base + SEGMENT_OFFSET(gKafeiMouthTeethTex));
     sPlayerMouthTextures[2] = (TexturePtr)(base + SEGMENT_OFFSET(gKafeiMouthAngryTex));
     sPlayerMouthTextures[3] = (TexturePtr)(base + SEGMENT_OFFSET(gKafeiMouthHappyTex));
-}
-
-void setKafeiFaceTexOnKafei() {
-    gKafeiEyesTextures[0] = gKafeiEyesOpenTex;
-    gKafeiEyesTextures[1] = gKafeiEyesHalfTex;
-    gKafeiEyesTextures[2] = gKafeiEyesClosedTex;
-    gKafeiEyesTextures[3] = gKafeiEyesRollRightTex;
-    gKafeiEyesTextures[4] = gKafeiEyesRollLeftTex;
-    gKafeiEyesTextures[5] = gKafeiEyesRollUpTex;
-    gKafeiEyesTextures[6] = gKafeiEyesRollDownTex;
-    gKafeiEyesTextures[7] = object_test3_Tex_006680;
-
-    gKafeiMouthTextures[0] = gKafeiMouthClosedTex;
-    gKafeiMouthTextures[1] = gKafeiMouthTeethTex;
-    gKafeiMouthTextures[2] = gKafeiMouthAngryTex;
-    gKafeiMouthTextures[3] = gKafeiMouthHappyTex;
 }
 
 void setLinkFaceTexOnLink() {
@@ -320,53 +284,8 @@ void restoreLink() {
     ZModelReplacer_removeCustomDL(OBJECT_LINK_CHILD, object_link_child_DL_017B40, gKafeiRightHandHoldingHookshotFirstPersonDL);
 }
 
-#define SET_LINK_OVER_KAFEI(vanillaKafeiDL, vanillaLinkDL) ZModelReplacer_addCustomDL(OBJECT_TEST3, vanillaKafeiDL, ZGlobalObj_getGlobalGfxPtr(OBJECT_LINK_CHILD, vanillaLinkDL))
-
-void replaceKafei() {
-    SET_LINK_OVER_KAFEI(gKafeiWaistDL, gLinkHumanWaistDL);
-    SET_LINK_OVER_KAFEI(gKafeiRightThighDL, gLinkHumanRightThighDL);
-    SET_LINK_OVER_KAFEI(gKafeiRightShinDL, gLinkHumanRightShinDL);
-    SET_LINK_OVER_KAFEI(gKafeiRightFootDL, gLinkHumanRightFootDL);
-    SET_LINK_OVER_KAFEI(gKafeiLeftThighDL, gLinkHumanLeftThighDL);
-    SET_LINK_OVER_KAFEI(gKafeiLeftShinDL, gLinkHumanLeftShinDL);
-    SET_LINK_OVER_KAFEI(gKafeiLeftFootDL, gLinkHumanLeftFootDL);
-    SET_LINK_OVER_KAFEI(gKafeiHeadDL, gLinkHumanHeadDL);
-    SET_LINK_OVER_KAFEI(gKafeiSunMaskEmptyDL, gLinkHumanHatDL);
-    SET_LINK_OVER_KAFEI(gKafeiSunMaskEmptyDL, gLinkHumanCollarDL);
-    SET_LINK_OVER_KAFEI(gKafeiLeftShoulderDL, gLinkHumanLeftShoulderDL);
-    SET_LINK_OVER_KAFEI(gKafeiLeftForearmDL, gLinkHumanLeftForearmDL);
-    SET_LINK_OVER_KAFEI(gKafeiLeftHandDL, gLinkHumanLeftHandOpenDL);
-    SET_LINK_OVER_KAFEI(gKafeiRightShoulderDL, gLinkHumanRightShoulderDL);
-    SET_LINK_OVER_KAFEI(gKafeiRightForearmDL, gLinkHumanRightForearmDL);
-    SET_LINK_OVER_KAFEI(gKafeiRightHandDL, gLinkHumanRightHandOpenDL);
-    SET_LINK_OVER_KAFEI(gKafeiTorsoDL, gLinkHumanTorsoDL);
-}
-
-#define REMOVE_LINK_OVER_KAFEI(vanillaKafeiDL, vanillaLinkDL) ZModelReplacer_removeCustomDL(OBJECT_TEST3, vanillaKafeiDL, ZGlobalObj_getGlobalGfxPtr(OBJECT_LINK_CHILD, vanillaLinkDL))
-
-void restoreKafei() {
-    REMOVE_LINK_OVER_KAFEI(gKafeiWaistDL, gLinkHumanWaistDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiRightThighDL, gLinkHumanRightThighDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiRightShinDL, gLinkHumanRightShinDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiRightFootDL, gLinkHumanRightFootDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiLeftThighDL, gLinkHumanLeftThighDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiLeftShinDL, gLinkHumanLeftShinDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiLeftFootDL, gLinkHumanLeftFootDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiHeadDL, gLinkHumanHeadDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiSunMaskEmptyDL, gLinkHumanHatDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiSunMaskEmptyDL, gLinkHumanCollarDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiLeftShoulderDL, gLinkHumanLeftShoulderDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiLeftForearmDL, gLinkHumanLeftForearmDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiLeftHandDL, gLinkHumanLeftHandOpenDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiRightShoulderDL, gLinkHumanRightShoulderDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiRightForearmDL, gLinkHumanRightForearmDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiRightHandDL, gLinkHumanRightHandOpenDL);
-    REMOVE_LINK_OVER_KAFEI(gKafeiTorsoDL, gLinkHumanTorsoDL);
-}
-
 void switchModelsIfNeeded() {
     u32 cfgKafeiOverLink = recomp_get_config_u32("kafei_over_link");
-    u32 cfgLinkOverKafei = recomp_get_config_u32("link_over_kafei");
     if (gIsKafeiOverLink != cfgKafeiOverLink) {
         gIsKafeiOverLink = cfgKafeiOverLink;
 
@@ -379,18 +298,6 @@ void switchModelsIfNeeded() {
         } else {
             restoreLink();
             setLinkFaceTexOnLink();
-        }
-    }
-
-    if (gIsLinkOverKafei != cfgLinkOverKafei) {
-        gIsLinkOverKafei = cfgLinkOverKafei;
-
-        if (gIsLinkOverKafei) {
-            replaceKafei();
-            setLinkFaceTexOnKafei();
-        } else {
-            restoreKafei();
-            setKafeiFaceTexOnKafei();
         }
     }
 }
@@ -412,6 +319,11 @@ void updateModel_on_Player_Init(Actor *thisx, PlayState *play) {
     }
 }
 
+RECOMP_HOOK("Player_Update")
+void updateModel_on_Player_Update(Actor *thisx, PlayState *play) {
+    switchModelsIfNeeded();
+}
+
 Player *gPlayer;
 PlayerTransformation gPlayerTransformation;
 PlayState *gPlayState;
@@ -428,77 +340,7 @@ void pre_OverrideLimbDrawFirstPerson(PlayState *play, s32 limbIndex, Gfx **dList
 
 RECOMP_HOOK_RETURN("Player_OverrideLimbDrawGameplayFirstPerson")
 void post_OverrideLimbDrawFirstPerson() {
-    if (gLimbIndex == PLAYER_LIMB_RIGHT_FOREARM) {
+    if (gLimbIndex == PLAYER_LIMB_RIGHT_FOREARM && gIsKafeiOverLink) {
         *gFirstPersonDList = gLinkHumanRightForearmDL;
     }
-}
-
-Actor *gKafeiActor = NULL;
-
-RECOMP_HOOK("EnTest3_Draw")
-void grabKafei_on_EnTest3_Draw(Actor *thisx, PlayState *play2) {
-    gKafeiActor = thisx;
-}
-
-RECOMP_HOOK_RETURN("EnTest3_Draw")
-void releaseKafei_post_EnTest3_Draw() {
-    gKafeiActor = NULL;
-}
-
-typedef struct {
-    /* 0x0 */ u8 eyeIndex;
-    /* 0x1 */ u8 mouthIndex;
-} KafeiFace; // size = 0x2
-
-static KafeiFace sFaceExpressions[] = {
-    {0, 0},
-    {1, 0},
-    {2, 0},
-    {0, 0},
-    {1, 0},
-    {2, 0},
-    {4, 0},
-    {5, 1},
-    {7, 2},
-    {0, 2},
-    {3, 0},
-    {4, 0},
-    {2, 2},
-    {1, 1},
-    {0, 2},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-};
-
-RECOMP_HOOK("SkelAnime_DrawFlexLod")
-void replaceKafeiEyes_on_SkelAnime_DrawFlexLod(PlayState *play, void **skeleton, Vec3s *jointTable, s32 dListCount, OverrideLimbDrawFlex overrideLimbDraw, PostLimbDrawFlex postLimbDraw, Actor *actor, s32 lod) {
-    if (gKafeiActor == actor) {
-        Player *this = (Player *)actor;
-        s32 eyeTexIndex = GET_EYE_INDEX_FROM_JOINT_TABLE(this->skelAnime.jointTable);
-        s32 mouthTexIndex = GET_MOUTH_INDEX_FROM_JOINT_TABLE(this->skelAnime.jointTable);
-
-        if (eyeTexIndex < 0) {
-            eyeTexIndex = sFaceExpressions[this->actor.shape.face].eyeIndex;
-        }
-        if (mouthTexIndex < 0) {
-            mouthTexIndex = sFaceExpressions[this->actor.shape.face].mouthIndex;
-        }
-
-        gSegments[0x08] = (uintptr_t)gKafeiEyesTextures[eyeTexIndex];
-        gSegments[0x09] = (uintptr_t)gKafeiMouthTextures[mouthTexIndex];
-    }
-}
-
-RECOMP_HOOK("Player_Update")
-void pollModelChange(Actor *thisx, PlayState *play) {
-    gKafeiActor = NULL;
-    switchModelsIfNeeded();
-}
-
-RECOMP_HOOK("EnTest3_Init")
-on_EnTest3_Init(Actor *thisx, PlayState *play2) {
-
 }
