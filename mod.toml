@@ -64,28 +64,17 @@ data_reference_syms_files = [ "Zelda64RecompSyms/mm.us.rev1.datasyms.toml", "Zel
 additional_files = [ ]
 
 [[manifest.config_options]]
-id = "enum_option"
-name = "Enum Option"
-description = "Test enum config option"
+id = "kafei_over_link"
+name = "Replace Link with Kafei"
+description = "Loads Kafei's model over human Link's"
 type = "Enum"
-options = [ "First", "Second" ]
-default = "First"
+options = [ "Off", "On" ]
+default = "On"
 
 [[manifest.config_options]]
-id = "number_option"
-name = "Number Option"
-description = "Test number config option."
-type = "Number"
-min = 0
-max = 10
-step = 0.1
-precision = 1
-percent = false
-default = 1
-
-[[manifest.config_options]]
-id = "string_option"
-name = "String Option"
-description = "Test string config option."
-type = "String"
-default = "Lorem Ipsum"
+id = "link_over_kafei"
+name = "Replace Kafei with Link"
+description = "Loads human Link's model over Kafei's"
+type = "Enum"
+options = [ "Off", "On" ]
+default = "Off"
