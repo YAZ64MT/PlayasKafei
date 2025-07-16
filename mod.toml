@@ -8,21 +8,18 @@
 id = "yazmt_mm_playas_kafei"
 
 # Version of this mod.
-version = "0.0.0"
+version = "0.1.0"
 
 # The name that will show up for this mod in the mod menu. This should be human readable.
 display_name = "Play as Kafei"
 
 # The description that will show up when this mod is displayed in the mod menu. This should be human readable.
 description =  """
-This is an example mod for Majora's Mask: Recompiled that can be used as a template for creating mods. \
-When this mod is enabled, you will always perform a quickspin when swinging your sword.
-
-For more details, see https://github.com/Zelda64Recomp/MMRecompModTemplate."""
+Play as Kafei in Majora's Mask."""
 
 # A short description that will show up in this mod's entry in the mod list. This should be human readable and kept short
 # to prevent it from being cut off due to the limited space.
-short_description = "Always perform a quickspin when swinging your sword."
+short_description = "Play as Kafei."
 
 # Authors of this mod.
 authors = [ "Neirn" ]
@@ -31,14 +28,14 @@ authors = [ "Neirn" ]
 game_id = "mm"
 
 # Minimum version of the target recomp (e.g. Zelda 64: Recompiled) that this mod can run on.
-minimum_recomp_version = "1.2.0"
+minimum_recomp_version = "1.2.1"
 
 # Dependency mods. Each entry is the mod's ID and then an optional minimum version of the dependency mod.
 dependencies = [
 # Example dependency:
 #    "modname:1.0.0"
-    "yazmt_mm_global_objects:0.1.0",
-    "yazmt_mm_modelreplacer:0.1.0",
+    "yazmt_mm_global_objects",
+    "yazmt_mm_playermodelmanager",
 ]
 
 # Native libraries (e.g. DLLs) and the functions they export.
@@ -62,11 +59,3 @@ data_reference_syms_files = [ "Zelda64RecompSyms/mm.us.rev1.datasyms.toml", "Zel
 
 # Additional files to include in the mod.
 additional_files = [ ]
-
-[[manifest.config_options]]
-id = "kafei_over_link"
-name = "Replace Link with Kafei"
-description = "Loads Kafei's model over human Link's"
-type = "Enum"
-options = [ "Off", "On" ]
-default = "On"
