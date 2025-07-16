@@ -1,85 +1,105 @@
-#include "modding.h"
 #include "global.h"
+#include "modding.h"
 #include "recomputils.h"
-#include "recompconfig.h"
 #include "globalobjects_api.h"
-#include "playermodelmanager_api.h"
 #include "assets/objects/object_test3/object_test3.h"
-#include "assets/objects/object_link_child/object_link_child.h"
 #include "overlays/actors/ovl_En_Test3/z_en_test3.h"
+#include "kafei.h"
 
-PLAYERMODELMANAGER_CALLBACK_REGISTER_MODELS void registerKafei() {
+TexturePtr gKafeiEyeTextures[] = {
+    gKafeiEyesOpenTex,
+    gKafeiEyesHalfTex,
+    gKafeiEyesClosedTex,
+    gKafeiEyesRollRightTex,
+    gKafeiEyesRollLeftTex,
+    gKafeiEyesRollUpTex,
+    gKafeiEyesRollDownTex,
+    object_test3_Tex_006680,
+};
 
-    // Setup Kafei assets
+TexturePtr gKafeiMouthTextures[] = {
+    gKafeiMouthClosedTex,
+    gKafeiMouthTeethTex,
+    gKafeiMouthAngryTex,
+    gKafeiMouthHappyTex,
+};
+
+Gfx *gKafeiLeftFist;
+Gfx *gKafeiRightFist;
+Gfx *gKafeiLeftHandBottle;
+
+Gfx *gKafeiFPSRightHand;
+Gfx *gKafeiFPSRightForearm;
+Gfx *gKafeiFPSLeftHand;
+Gfx *gKafeiFPSLeftForearm;
+
+void *gKafeiSkeletonLimbs[] = {
+    &gKafeiRootLimb,          /* KAFEI_LIMB_ROOT */
+    &gKafeiWaistLimb,         /* KAFEI_LIMB_WAIST */
+    &gKafeiLowerRootLimb,     /* KAFEI_LIMB_LOWER_ROOT */
+    &gKafeiRightThighLimb,    /* KAFEI_LIMB_RIGHT_THIGH */
+    &gKafeiRightShinLimb,     /* KAFEI_LIMB_RIGHT_SHIN */
+    &gKafeiRightFootLimb,     /* KAFEI_LIMB_RIGHT_FOOT */
+    &gKafeiLeftThighLimb,     /* KAFEI_LIMB_LEFT_THIGH */
+    &gKafeiLeftShinLimb,      /* KAFEI_LIMB_LEFT_SHIN */
+    &gKafeiLeftFootLimb,      /* KAFEI_LIMB_LEFT_FOOT */
+    &gKafeiUpperRootLimb,     /* KAFEI_LIMB_UPPER_ROOT */
+    &gKafeiHeadLimb,          /* KAFEI_LIMB_HEAD */
+    &gKafeiHatLimb,           /* KAFEI_LIMB_HAT */
+    &gKafeiCollarLimb,        /* KAFEI_LIMB_COLLAR */
+    &gKafeiLeftShoulderLimb,  /* KAFEI_LIMB_LEFT_SHOULDER */
+    &gKafeiLeftForearmLimb,   /* KAFEI_LIMB_LEFT_FOREARM */
+    &gKafeiLeftHandLimb,      /* KAFEI_LIMB_LEFT_HAND */
+    &gKafeiRightShoulderLimb, /* KAFEI_LIMB_RIGHT_SHOULDER */
+    &gKafeiRightForearmLimb,  /* KAFEI_LIMB_RIGHT_FOREARM */
+    &gKafeiRightHandLimb,     /* KAFEI_LIMB_RIGHT_HAND */
+    &gKafeiSheathLimb,        /* KAFEI_LIMB_SHEATH */
+    &gKafeiTorsoLimb,         /* KAFEI_LIMB_TORSO */
+};
+
+FlexSkeletonHeader gKafeiSkeleton = {{gKafeiSkeletonLimbs, ARRAY_COUNT(gKafeiSkeletonLimbs)}, 18};
+
+void setupKafeiAssets() {
     void *kafeiObj = GlobalObjects_getGlobalObject(OBJECT_TEST3);
 
-    TexturePtr eyeTextures[] = {
-        gKafeiEyesOpenTex,
-        gKafeiEyesHalfTex,
-        gKafeiEyesClosedTex,
-        gKafeiEyesRollRightTex,
-        gKafeiEyesRollLeftTex,
-        gKafeiEyesRollUpTex,
-        gKafeiEyesRollDownTex,
-        object_test3_Tex_006680,
-    };
+    gKafeiLeftFist = GlobalObjects_getGlobalGfxPtr(OBJECT_TEST3, gKafeiLeftHandDL);
+    gKafeiRightFist = GlobalObjects_getGlobalGfxPtr(OBJECT_TEST3, gKafeiRightHandDL);
+    gKafeiLeftHandBottle = gKafeiLeftFist;
+    gKafeiFPSRightHand = gKafeiRightFist;
+    gKafeiFPSRightForearm = GlobalObjects_getGlobalGfxPtr(OBJECT_TEST3, gKafeiRightForearmDL);
+    gKafeiFPSLeftHand = gKafeiLeftFist;
+    gKafeiFPSLeftForearm = GlobalObjects_getGlobalGfxPtr(OBJECT_TEST3, gKafeiLeftForearmDL);
 
-    for (int i = 0; i < ARRAY_COUNT(eyeTextures); ++i) {
-        eyeTextures[i] = SEGMENTED_TO_GLOBAL_PTR(kafeiObj, eyeTextures[i]);
+    recomp_printf("Got here1\n");
+
+    for (int i = 0; i < ARRAY_COUNT(gKafeiEyeTextures); ++i) {
+        gKafeiEyeTextures[i] = SEGMENTED_TO_GLOBAL_PTR(kafeiObj, gKafeiEyeTextures[i]);
     }
 
-    TexturePtr mouthTextures[] = {
-        gKafeiMouthClosedTex,
-        gKafeiMouthTeethTex,
-        gKafeiMouthAngryTex,
-        gKafeiMouthHappyTex,
-    };
-
-    for (int i = 0; i < ARRAY_COUNT(mouthTextures); ++i) {
-        mouthTextures[i] = SEGMENTED_TO_GLOBAL_PTR(kafeiObj, mouthTextures[i]);
+    for (int i = 0; i < ARRAY_COUNT(gKafeiMouthTextures); ++i) {
+        gKafeiMouthTextures[i] = SEGMENTED_TO_GLOBAL_PTR(kafeiObj, gKafeiMouthTextures[i]);
     }
 
-    Gfx *kafeiLeftFist = GlobalObjects_getGlobalGfxPtr(OBJECT_TEST3, gKafeiLeftHandDL);
-    Gfx *kafeiRightFist = GlobalObjects_getGlobalGfxPtr(OBJECT_TEST3, gKafeiRightHandDL);
-    Gfx *kafeiLeftHandBottle = kafeiLeftFist;
+    recomp_printf("Got here2\n");
 
-    Gfx *kafeiFPSRightHand = kafeiRightFist;
-    Gfx *kafeiFPSRightForearm = GlobalObjects_getGlobalGfxPtr(OBJECT_TEST3, gKafeiRightForearmDL);
-    Gfx *kafeiFPSLeftHand = kafeiLeftFist;
-    Gfx *kafeiFPSLeftForearm = GlobalObjects_getGlobalGfxPtr(OBJECT_TEST3, gKafeiLeftForearmDL);
+    GlobalObjects_globalizeLodLimbSkeleton(kafeiObj, &gKafeiSkeleton);
 
-    FlexSkeletonHeader *kafeiSkel = SEGMENTED_TO_GLOBAL_PTR(kafeiObj, &gKafeiSkel);
-    GlobalObjects_globalizeLodLimbSkeleton(kafeiObj, kafeiSkel);
+    recomp_printf("Got here3\n");
 
     GlobalObjectsSegmentMap kafeiSegments = {0};
     kafeiSegments[0x06] = kafeiObj;
     kafeiSegments[0x04] = GlobalObjects_getGlobalObject(GAMEPLAY_KEEP);
 
-    LodLimb **limbs = (LodLimb **)(kafeiSkel->sh.segment);
-    for (int i = 0; i < kafeiSkel->sh.limbCount; ++i) {
+    recomp_printf("Got here4\n");
+    LodLimb **limbs = (LodLimb **)(gKafeiSkeleton.sh.segment);
+    for (int i = 0; i < gKafeiSkeleton.sh.limbCount; ++i) {
         LodLimb *limb = limbs[i];
 
         if (limb->dLists[0]) {
             GlobalObjects_rebaseDL(limb->dLists[0], kafeiSegments);
-            limb->dLists[1] = limb->dLists[0];
+            GlobalObjects_rebaseDL(limb->dLists[1], kafeiSegments);
         }
     }
 
-    // PlayerModelManager stuff
-    PlayerModelManagerHandle h = PLAYERMODELMANAGER_REGISTER_MODEL("mm_kafei_pmm_built_in", PMM_MODEL_TYPE_CHILD);
-
-    PlayerModelManager_setAuthor(h, "Nintendo");
-    PlayerModelManager_setDisplayName(h, "Kafei");
-    PlayerModelManager_setEyesTextures(h, eyeTextures);
-    PlayerModelManager_setMouthTextures(h, mouthTextures);
-
-    PlayerModelManager_setSkeleton(h, kafeiSkel);
-
-    PlayerModelManager_setDisplayList(h, PMM_DL_LFIST, kafeiLeftFist);
-    PlayerModelManager_setDisplayList(h, PMM_DL_RFIST, kafeiRightFist);
-    PlayerModelManager_setDisplayList(h, PMM_DL_LHAND_BOTTLE, kafeiLeftHandBottle);
-    PlayerModelManager_setDisplayList(h, PMM_DL_FPS_RHAND, kafeiFPSRightHand);
-    PlayerModelManager_setDisplayList(h, PMM_DL_FPS_RFOREARM, kafeiFPSRightForearm);
-    PlayerModelManager_setDisplayList(h, PMM_DL_FPS_LHAND, kafeiFPSLeftHand);
-    PlayerModelManager_setDisplayList(h, PMM_DL_FPS_LFOREARM, kafeiFPSLeftForearm);
+    recomp_printf("Got here5\n");
 }
