@@ -122,13 +122,13 @@ typedef enum {
     PMM_DL_MASK_BLAST_COOLING_DOWN,
     PMM_DL_MASK_SCENTS,
     PMM_DL_MASK_GIANT,
-    PMM_DL_MASK_DEKU,
-    PMM_DL_MASK_GORON,
-    PMM_DL_MASK_ZORA,
-    PMM_DL_MASK_FIERCE_DEITY,
-    PMM_DL_MASK_DEKU_SCREAM,
-    PMM_DL_MASK_GORON_SCREAM,
-    PMM_DL_MASK_ZORA_SCREAM,
+    PMM_DL_MASK_DEKU,         // Only used if model is Deku
+    PMM_DL_MASK_GORON,        // Only used if model is Goron
+    PMM_DL_MASK_ZORA,         // Only used if model is Zora
+    PMM_DL_MASK_FIERCE_DEITY, // Only used if model is Fierce Deity
+    PMM_DL_MASK_DEKU_SCREAM,  // Only used if model is Deku
+    PMM_DL_MASK_GORON_SCREAM, // Only used if model is Goron
+    PMM_DL_MASK_ZORA_SCREAM,  // Only used if model is Zora
     PMM_DL_MASK_FIERCE_DEITY_SCREAM,
 
     // Elegy of Emptiness statues
@@ -419,7 +419,8 @@ RECOMP_IMPORT(YAZMT_PMM_MOD_NAME, bool PlayerModelManager_setSkeleton(PlayerMode
 
 // Sets the skeleton and any display lists attached to it on the shielding skeleton of a custom model.
 //
-// This is used for Goron Link's guard animation, so make sure to pass in a skeleton with the appropriaate amount of limbs.
+// This is used for Goron Link's guard animation, so make sure to pass in a skeleton with the appropriate
+// amount of limbs (4).
 //
 // Returns true if successfully set, false otherwise.
 RECOMP_IMPORT(YAZMT_PMM_MOD_NAME, bool PlayerModelManager_setShieldingSkeleton(PlayerModelManagerHandle h, FlexSkeletonHeader *skel));
