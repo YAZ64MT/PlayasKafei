@@ -1,6 +1,8 @@
-# Majora's Mask: Recompiled Mod Template
+# Play as Kafei in Majora's Mask: Recompiled
 
-This is an example mod for Majora's Mask: Recompiled that can be used as a template for creating mods. It has a basic build system, headers, sample code, and a mod config toml.
+This is a mod for Majora's Mask: Recompiled that allows Link to be replaced with Kafei via PlayerModelManager.
+
+It also serves as an example of the most basic model replacement. See the code in [main.c](https://github.com/YAZ64MT/PlayasKafei/blob/main/src/main.c) for details.
 
 Example code for using the recompui API to build ingame UI can be found in the `ui-example` branch.
 
