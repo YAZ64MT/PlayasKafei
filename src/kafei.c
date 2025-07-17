@@ -70,8 +70,6 @@ void setupKafeiAssets() {
     gKafeiFPSLeftHand = gKafeiLeftFist;
     gKafeiFPSLeftForearm = GlobalObjects_getGlobalGfxPtr(OBJECT_TEST3, gKafeiLeftForearmDL);
 
-    recomp_printf("Got here1\n");
-
     for (int i = 0; i < ARRAY_COUNT(gKafeiEyeTextures); ++i) {
         gKafeiEyeTextures[i] = SEGMENTED_TO_GLOBAL_PTR(kafeiObj, gKafeiEyeTextures[i]);
     }
@@ -80,17 +78,12 @@ void setupKafeiAssets() {
         gKafeiMouthTextures[i] = SEGMENTED_TO_GLOBAL_PTR(kafeiObj, gKafeiMouthTextures[i]);
     }
 
-    recomp_printf("Got here2\n");
-
     GlobalObjects_globalizeLodLimbSkeleton(kafeiObj, &gKafeiSkeleton);
-
-    recomp_printf("Got here3\n");
 
     GlobalObjectsSegmentMap kafeiSegments = {0};
     kafeiSegments[0x06] = kafeiObj;
     kafeiSegments[0x04] = GlobalObjects_getGlobalObject(GAMEPLAY_KEEP);
 
-    recomp_printf("Got here4\n");
     LodLimb **limbs = (LodLimb **)(gKafeiSkeleton.sh.segment);
     for (int i = 0; i < gKafeiSkeleton.sh.limbCount; ++i) {
         LodLimb *limb = limbs[i];
@@ -101,5 +94,4 @@ void setupKafeiAssets() {
         }
     }
 
-    recomp_printf("Got here5\n");
 }
