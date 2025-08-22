@@ -1,0 +1,10 @@
+{
+    "name": "Play_as_Kafei",
+    "version_number": "0.1.0",
+    "website_url": "https://github.com/YAZ64MT/PlayasKafei",
+    "description": "Play as Kafei.",
+    "dependencies": [
+        "YAZMT-Global_Objects-0.1.1",
+        "YAZMT-Player_Model_Manager-0.3.0"
+    ]
+}
